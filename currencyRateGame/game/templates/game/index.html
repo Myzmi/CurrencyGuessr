@@ -1,0 +1,141 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>CurrencyGuessr</title>
+        <link rel="stylesheet", href="{% static 'game/styles.css' %}">
+        
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+        <script>
+
+            let yearR=2;
+            let monthR=2;
+            let rateR=2;
+            let numTurns=0;
+            let currentTurn=1;
+            let score = 0;
+
+            function randomRate(){
+                $.ajax({
+                    url: "/get_random_object", // URL to your Django view to fetch random object details
+                    type: 'GET',
+                    success: function(data) {
+                        // Process the JSON response
+                        yearR = data.year;
+                        monthR = data.month;
+                        rateR = data.rate;
+
+                        document.querySelector('#date').innerHTML = `Date: ${monthR}.${yearR}`;
+                    }
+                });
+            }
+
+            function startGame(){
+                randomRate();
+                document.querySelector('#main_page').style.display = 'none';
+                document.querySelector('#game_page').style.display = 'block';
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                document.querySelector('#form_start').onsubmit = () => {
+                    numTurns = document.querySelector('#num_start').value;
+                    document.querySelector('#header_turn').innerHTML = `Turn ${currentTurn}/${numTurns} Score: 0`;
+                    startGame();
+                    return false;
+                }
+
+                document.querySelector('#form_rate').onsubmit = () => {
+
+                    //calculation
+                    let guess = document.querySelector('#num_guess').value;
+                    let diff = Math.abs(rateR-guess).toFixed(2);
+                    let diff_percent = (diff/rateR*100).toFixed(2); 
+                    let turn_point = 100-Math.round(diff_percent);
+                    if(turn_point<0){
+                        turn_point=0;
+                    }
+                    score += turn_point;
+
+                    document.querySelector('#submit_rate').disabled = true;
+                    document.querySelector('#guess_result').style.display = 'block';
+                    document.querySelector('#button_next').style.display = 'block';
+
+                    //print
+                    document.querySelector('#guess_result').innerHTML = `True rate: ${rateR.toFixed(2)} (${monthR}.${yearR})<br>
+                    Your guess: ${guess}<br>Difference: ${diff_percent}%<br>Turn score: ${turn_point}`;
+                    document.querySelector('#header_turn').innerHTML = `Turn ${currentTurn}/${numTurns} Score: ${score}`;
+                    return false;
+                }
+
+                document.querySelector('#button_next').onclick = () =>{
+                    currentTurn++;
+                    if(currentTurn>numTurns){
+                        document.querySelector('#submit_rate').disabled = false;
+                        document.querySelector('#num_guess').value = '';
+                        document.querySelector('#guess_result').style.display = 'none';
+                        document.querySelector('#button_next').style.display = 'none';
+
+                        document.querySelector('#results').innerHTML = `Your Score: ${score}/${numTurns*100}`;
+                        document.querySelector('#game_page').style.display = 'none';
+                        document.querySelector('#result_page').style.display = 'block';
+                    }else{
+                        document.querySelector('#header_turn').innerHTML = `Turn ${currentTurn}/${numTurns} Score: ${score}`;
+                        document.querySelector('#submit_rate').disabled = false;
+                        document.querySelector('#num_guess').value = '';
+                        document.querySelector('#guess_result').style.display = 'none';
+                        document.querySelector('#button_next').style.display = 'none';
+                        randomRate();
+                    }
+                };
+
+                document.querySelector('#form_replay').onsubmit = () => {
+                    numTurns = document.querySelector('#num_start').value;
+                    currentTurn=1;
+                    score = 0;
+
+                    document.querySelector('#header_turn').innerHTML = `Turn ${currentTurn}/${numTurns} Score: 0`;
+                    document.querySelector('#num_replay').value = '';
+
+                    randomRate();
+                    document.querySelector('#result_page').style.display = 'none';
+                    document.querySelector('#game_page').style.display = 'block';
+
+                    return false;
+                }
+            })
+
+        </script>
+    </head>
+    <body>
+        <div id="main_page">
+            <h1>CurrencyGuessr</h1>
+            <p>Welcome to the Currency Conversion Challenge!<br>How many turns would you like to play?</p>
+            <form id="form_start">
+                <input type="number" id="num_start" placeholder="Number of Turns">
+                <input type="submit" id="submit_start" value="Start Game">
+            </form>
+        </div>
+        <div id="game_page">
+            <h1>CurrencyGuessr</h1>
+            <h2 id="header_turn">Turn 1</h2>
+            <p id="date">month.year</p>
+            <form id="form_rate">
+                <input type="number" step="any" id="num_guess" placeholder="USD to TRY rate">
+                <input id="submit_rate" type="submit" value="Submit">
+            </form>
+            <button id="button_next">next</button>
+            <p id="guess_result">guess</p>
+        </div>
+        <div id="result_page">
+            <h1>CurrencyGuessr</h1>
+            <h2>Game Results</h2>
+            <p id="results">results</p>
+            <form id="form_replay">
+                <input type="number" id="num_replay" placeholder="Number of Turns">
+                <button type="submit" id="replay">Play Again</button>
+            </form>
+        </div>
+    </body>
+</html>

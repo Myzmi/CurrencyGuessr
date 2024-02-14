@@ -1,0 +1,55 @@
+body{
+    text-align: center;
+}
+
+div{
+    margin: 15px auto;
+    background-color: hsl(37, 98%, 53%);
+    padding: 15px;
+    border-radius: 15px;
+    min-height: 250px;
+    max-width: 500px;
+    min-width: 300px;
+    width: 80%;
+    margin: 15px auto;
+}
+
+h1{
+    margin-top: 0px;
+}
+
+input, button{
+    background-color: #df2b2b;
+    border: 1px solid #2D2B23;
+    border-radius: 3px;
+    color: white;
+}
+
+input:disabled{
+    opacity: 30%;
+}
+
+#button_next{
+    margin: 15px auto;
+}
+
+::placeholder{
+    color: white;
+    opacity: 50%;
+}
+
+#game_page{
+    display: none;
+}
+
+#result_page{
+    display: none;
+}
+
+#guess_result{
+    display: none;
+}
+
+#button_next{
+    display: none;
+}
