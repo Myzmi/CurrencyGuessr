@@ -53,3 +53,14 @@ input:disabled{
 #button_next{
     display: none;
 }
+
+#explanation{
+    text-align: left;
+}
+
+/* Add margin-bottom to <br> elements in explanation*/
+#explanation br{
+    display: block; /* makes it have a width */
+    content: ""; /* clears default height */
+    margin-top: 1em; /* change this to whatever height you want it */
+}
