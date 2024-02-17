@@ -1,8 +1,33 @@
 body{
     text-align: center;
+    background-color: aqua;
 }
 
-div{
+#main_page {
+    margin: 15px auto;
+    background-color: hsl(37, 98%, 53%);
+    padding: 15px;
+    border-radius: 15px;
+    min-height: 250px;
+    max-width: 500px;
+    min-width: 300px;
+    width: 80%;
+    margin: 15px auto;
+}
+
+#game_page {
+    margin: 15px auto;
+    background-color: hsl(37, 98%, 53%);
+    padding: 15px;
+    border-radius: 15px;
+    min-height: 250px;
+    max-width: 500px;
+    min-width: 300px;
+    width: 80%;
+    margin: 15px auto;
+}
+
+#result_page {
     margin: 15px auto;
     background-color: hsl(37, 98%, 53%);
     padding: 15px;
@@ -55,12 +80,24 @@ input:disabled{
 }
 
 #explanation{
-    text-align: left;
+    text-align: center;
+    margin: 15px auto;
+    background-color: hsl(101, 98%, 53%);
+    padding: 15px;
+    border-radius: 15px;
+    min-height: 250px;
+    max-width: 500px;
+    min-width: 300px;
+    width: 80%;
+    margin: 15px auto;
+    font-family: 'Gotham', sans-serif;
 }
 
 /* Add margin-bottom to <br> elements in explanation*/
 #explanation br{
-    display: block; /* makes it have a width */
+    display: block;
+    width: 50%; /* makes it have a width */
     content: ""; /* clears default height */
     margin-top: 1em; /* change this to whatever height you want it */
+    margin-bottom: 1em;
 }
