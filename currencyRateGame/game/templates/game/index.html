@@ -36,6 +36,7 @@
                 randomRate();
                 document.querySelector('#main_page').style.display = 'none';
                 document.querySelector('#game_page').style.display = 'block';
+                document.querySelector('#explanation').style.display = 'none';
             }
 
             document.addEventListener('DOMContentLoaded', () => {
@@ -113,7 +114,7 @@
             <h1>CurrencyGuessr</h1>
             <p>Welcome to the Currency Conversion Challenge!<br>How many turns would you like to play?</p>
             <form id="form_start">
-                <input type="number" id="num_start" placeholder="Number of Turns">
+                <input type="number" id="num_start" placeholder="Number of Turns" min="1">
                 <input type="submit" id="submit_start" value="Start Game">
             </form>
         </div>
@@ -122,7 +123,7 @@
             <h2 id="header_turn">Turn 1</h2>
             <p id="date">month.year</p>
             <form id="form_rate">
-                <input type="number" step="any" id="num_guess" placeholder="USD to TRY rate">
+                <input type="number" step="any" id="num_guess" placeholder="USD to TRY rate" min="0">
                 <input id="submit_rate" type="submit" value="Submit">
             </form>
             <button id="button_next">next</button>
@@ -133,7 +134,7 @@
             <h2>Game Results</h2>
             <p id="results">results</p>
             <form id="form_replay">
-                <input type="number" id="num_replay" placeholder="Number of Turns">
+                <input type="number" id="num_replay" placeholder="Number of Turns" min="1">
                 <button type="submit" id="replay">Play Again</button>
             </form>
         </div>

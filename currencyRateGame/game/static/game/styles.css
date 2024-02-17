@@ -3,6 +3,14 @@ body{
     background-color: aqua;
 }
 
+h1{
+    font-family: "Courier New", Courier, monospace;
+}
+
+#main_page, #game_page, #result_page{
+    font-family: 'Gotham', sans-serif;
+}
+
 #main_page {
     margin: 15px auto;
     background-color: hsl(37, 98%, 53%);
