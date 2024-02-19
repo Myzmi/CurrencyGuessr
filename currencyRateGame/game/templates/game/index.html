@@ -16,6 +16,8 @@
             let numTurns=0;
             let currentTurn=1;
             let score = 0;
+            let scores = [];
+            let resultStr = "";
 
             function randomRate(){
                 $.ajax({
@@ -58,6 +60,7 @@
                         turn_point=0;
                     }
                     score += turn_point;
+                    scores.push(turn_point);
 
                     document.querySelector('#submit_rate').disabled = true;
                     document.querySelector('#guess_result').style.display = 'block';
@@ -78,9 +81,16 @@
                         document.querySelector('#guess_result').style.display = 'none';
                         document.querySelector('#button_next').style.display = 'none';
 
-                        document.querySelector('#results').innerHTML = `Your Score: ${score}/${numTurns*100}`;
                         document.querySelector('#game_page').style.display = 'none';
                         document.querySelector('#result_page').style.display = 'block';
+
+                        resultStr = "Your Score: "+ score +"/"+ (numTurns*100);
+                        for(var i=0; i<numTurns; i++){
+                            resultStr += "<br>Turn "+ (i+1) +": "+ scores[i]+"/"+ 100;
+                            console.log(scores[i]);
+                        }
+
+                        document.querySelector('#results').innerHTML = resultStr;
                     }else{
                         document.querySelector('#header_turn').innerHTML = `Turn ${currentTurn}/${numTurns} Score: ${score}`;
                         document.querySelector('#submit_rate').disabled = false;
@@ -95,6 +105,7 @@
                     numTurns = document.querySelector('#num_start').value;
                     currentTurn=1;
                     score = 0;
+                    scores.splice(0);
 
                     document.querySelector('#header_turn').innerHTML = `Turn ${currentTurn}/${numTurns} Score: 0`;
                     document.querySelector('#num_replay').value = '';
@@ -114,7 +125,7 @@
             <h1>CurrencyGuessr</h1>
             <p>Welcome to the Currency Conversion Challenge!<br>How many turns would you like to play?</p>
             <form id="form_start">
-                <input type="number" id="num_start" placeholder="Number of Turns" min="1">
+                <input type="number" id="num_start" placeholder="Number of Turns" min="1" max="10">
                 <input type="submit" id="submit_start" value="Start Game">
             </form>
         </div>
@@ -134,7 +145,7 @@
             <h2>Game Results</h2>
             <p id="results">results</p>
             <form id="form_replay">
-                <input type="number" id="num_replay" placeholder="Number of Turns" min="1">
+                <input type="number" id="num_replay" placeholder="Number of Turns" min="1" max="10">
                 <button type="submit" id="replay">Play Again</button>
             </form>
         </div>

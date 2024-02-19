@@ -111,3 +111,7 @@ input:disabled{
     margin-top: 1em; /* change this to whatever height you want it */
     margin-bottom: 1em;
 }
+
+#num_start, #num_replay{
+    width: 120px; /* got to set it manually after setting the max value for input to 10 */
+}
