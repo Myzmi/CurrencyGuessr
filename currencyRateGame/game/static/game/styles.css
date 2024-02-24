@@ -92,7 +92,7 @@ input:disabled{
 #explanation{
     text-align: center;
     margin: 15px auto;
-    background-color: hsl(101, 98%, 53%);
+    background-color: #fff2f2;
     padding: 15px;
     border-radius: 15px;
     min-height: 250px;
