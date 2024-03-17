@@ -1,3 +1,5 @@
+## CurrencyGussr
+
 This program is a web-based application titled **CurrencyGuessr**, developed using the Django framework, a high-level Python web framework that encourages rapid development and clean, pragmatic design. The application is designed as a game where players guess currency conversion rates, specifically focusing on the conversion rate from USD to TRY (Turkish Lira). The game aims to draw attention to the challenges of predicting currency rates in the context of Turkey's economy, which has been experiencing significant inflation and currency devaluation.
 
 The JavaScript code embedded within the HTML document is crucial for the game's interactivity. It defines several key functions and event listeners:
